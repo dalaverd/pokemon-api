@@ -10,6 +10,10 @@ This is an API for Pokemon.
 
     http://localhost:8000/docs
 
+## Run tests
+
+    pytest tests/
+
 # REST API
 
 The REST API to the pokemon-api app is described below.
