@@ -8,8 +8,7 @@ from db import crud, models, schemas
 from db.database import SessionLocal, engine
 from db.models import Pokemon
 
-Pokemon.__table__.drop(engine)
-
+models.Base.metadata.drop_all(bind=engine)
 models.Base.metadata.create_all(bind=engine)
 
 logger = logging.getLogger("uvicorn.error")
@@ -25,13 +24,11 @@ session.configure(bind=engine)
 s = session()
 
 count_pokemon = s.query(Pokemon).count()
-
 logger.info("Number of pokemons in database : %s", count_pokemon)
 
 app = FastAPI()
 
 
-# Dependency
 def get_db():
     db = SessionLocal()
     try:
